@@ -16,6 +16,13 @@ public class Holiday {
     @Max(7)
     private Integer holidayTime;
 
+    public Holiday(){}
+
+    public Holiday(Integer holidayCount, Integer holidayTime) {
+        this.holidayCount = holidayCount;
+        this.holidayTime = holidayTime;
+    }
+
     // -------------------------
     // |-- getters & setters --|
     // -------------------------
