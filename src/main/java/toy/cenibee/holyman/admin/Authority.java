@@ -2,17 +2,18 @@ package toy.cenibee.holyman.admin;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Embeddable
 public class Authority {
 
-    @NotEmpty
+    @NotNull
     private Boolean employee_man;
 
-    @NotEmpty
+    @NotNull
     private Boolean authority_man;
 
-    @NotEmpty
+    @NotNull
     private Boolean holiday_man;
 
     // -------------------------

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Admin extends BaseEntity {
@@ -23,10 +24,10 @@ public class Admin extends BaseEntity {
     )
     private String password;
 
-    @NotEmpty
+    @NotNull
     private Authority authority;
 
-    @NotEmpty
+    @NotNull
     @OneToOne
     private Employee employee;
 

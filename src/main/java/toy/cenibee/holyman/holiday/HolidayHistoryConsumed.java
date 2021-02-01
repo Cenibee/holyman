@@ -3,11 +3,12 @@ package toy.cenibee.holyman.holiday;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @DiscriminatorValue("Consumed")
 public class HolidayHistoryConsumed extends HolidayHistory{
-    @NotEmpty
+    @NotNull
     private Boolean approved;
 
     // -------------------------

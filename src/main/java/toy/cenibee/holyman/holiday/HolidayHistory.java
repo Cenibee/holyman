@@ -6,6 +6,7 @@ import toy.cenibee.holyman.model.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -13,16 +14,16 @@ import java.util.Date;
 @DiscriminatorValue("not null")
 public class HolidayHistory extends BaseEntity {
 
-    @NotEmpty
+    @NotNull
     private Date historyDate;
 
-    @NotEmpty
+    @NotNull
     private Holiday holiday;
 
     @NotEmpty
     private String description;
 
-    @NotEmpty
+    @NotNull
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "EMPLOYEE_HOLIDAY_HISTORY"))
     private Employee employee;

@@ -6,6 +6,7 @@ import toy.cenibee.holyman.model.NamedEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -20,13 +21,13 @@ public class Employee extends NamedEntity {
     @NotEmpty
     private String phNumber;
 
-//    @NotEmpty
+    @NotNull
     private Date entranceDate;
 
-//    @NotEmpty
+    @NotNull
     private Holiday holiday;
 
-//    @NotEmpty
+    @NotNull
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "EMPLOYEE_BELONG_TO_DEPARTMENT"))
     private Department department;

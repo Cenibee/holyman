@@ -1,16 +1,19 @@
 package toy.cenibee.holyman.holiday;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 @Embeddable
 public class Holiday {
     private static final Integer COUNT_TO_TIME = 8;
 
-    @NotEmpty
+    @Min(0)
     private Integer holidayCount;
 
-    @NotEmpty
+    @Min(0)
+    @Max(7)
     private Integer holidayTime;
 
     // -------------------------
