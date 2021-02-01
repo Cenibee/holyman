@@ -37,9 +37,12 @@ class EmployeeList extends React.Component {
             <table>
                 <tbody>
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Description</th>
+                    <th>Employee</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Rest Holiday</th>
+                    <th>Rest Holitime</th>
+                    <th>Entrance Date</th>
                 </tr>
                 {employees}
                 </tbody>
@@ -52,9 +55,12 @@ class Employee extends React.Component {
     render() {
         return (
             <tr>
-                <td>{this.props.employee.firstName}</td>
-                <td>{this.props.employee.lastName}</td>
-                <td>{this.props.employee.description}</td>
+                <td>{this.props.employee.name}</td>
+                <td>{this.props.employee.address}</td>
+                <td>{this.props.employee.phNumber}</td>
+                <td>{this.props.employee.holiday.holidayCount}</td>
+                <td>{this.props.employee.holiday.holidayTime}</td>
+                <td>{this.props.employee.entranceDate}</td>
             </tr>
         )
     }
