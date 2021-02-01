@@ -37,5 +37,8 @@ out/
 /node/
 /node_modules/
 
+### Built by siouan.frontend
+/src/main/resources/static/built/
+
 ### VS Code ###
 .vscode/
