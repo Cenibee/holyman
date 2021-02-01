@@ -33,5 +33,9 @@ out/
 /nbdist/
 /.nb-gradle/
 
+### Embedded NodeJS ###
+/node/
+/node_modules/
+
 ### VS Code ###
 .vscode/

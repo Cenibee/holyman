@@ -4,6 +4,8 @@ plugins {
 
     id 'java'
     id 'war'
+
+    id "org.siouan.frontend-jdk8" version "5.0.0"
 }
 
 group 'toy.cenibee'
@@ -28,4 +30,16 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+frontend {
+    nodeDistributionProvided = false
+    nodeVersion = '14.15.4'
+    nodeInstallDirectory = file("${projectDir}/node")
+
+    assembleScript = 'run build'
+}
+
+processResources {
+    dependsOn assembleFrontend
 }
