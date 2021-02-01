@@ -15,7 +15,7 @@ public class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     public boolean isNew() {
         return this.id == null;
@@ -24,10 +24,10 @@ public class BaseEntity implements Serializable {
     // -------------------------
     // |-- getters & setters --|
     // -------------------------
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

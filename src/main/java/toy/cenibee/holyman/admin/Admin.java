@@ -3,14 +3,15 @@ package toy.cenibee.holyman.admin;
 
 import org.hibernate.annotations.ColumnTransformer;
 import toy.cenibee.holyman.employee.Employee;
+import toy.cenibee.holyman.model.BaseEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@PrimaryKeyJoinColumn
-public class Admin extends Employee {
+public class Admin extends BaseEntity {
 
     @NotEmpty
     private String adminId;
@@ -24,6 +25,10 @@ public class Admin extends Employee {
 
     @NotEmpty
     private Authority authority;
+
+    @NotEmpty
+    @OneToOne
+    private Employee employee;
 
     // -------------------------
     // |-- getters & setters --|
@@ -45,5 +50,11 @@ public class Admin extends Employee {
     }
     public void setAuthority(Authority authority) {
         this.authority = authority;
+    }
+    public Employee getEmployee() {
+        return employee;
+    }
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

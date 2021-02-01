@@ -9,7 +9,6 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Employee extends NamedEntity {
 
     @NotEmpty
@@ -21,13 +20,13 @@ public class Employee extends NamedEntity {
     @NotEmpty
     private String phNumber;
 
-    @NotEmpty
+//    @NotEmpty
     private Date entranceDate;
 
-    @NotEmpty
+//    @NotEmpty
     private Holiday holiday;
 
-    @NotEmpty
+//    @NotEmpty
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "EMPLOYEE_BELONG_TO_DEPARTMENT"))
     private Department department;
