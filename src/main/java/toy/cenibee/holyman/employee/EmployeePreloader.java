@@ -29,16 +29,18 @@ public class EmployeePreloader implements CommandLineRunner {
 
         dept = departmentRepository.save(dept);
 
-        Employee emp = new Employee();
-        emp.setPhNumber("010-1234-1234");
-        emp.setName("Bab");
-        emp.setAddress("Seoul");
-        emp.setMailAddress("abc@asdf.com");
-        emp.setEntranceDate(new Date());
-        emp.setDepartment(dept);
-        emp.setHoliday(new Holiday(15, 0));
-
-        employeeRepository.save(emp);
+        employeeRepository.save(new Employee("Bab", "abc@asdf.com", "Seoul",
+                "010-1234-1234", new Date(), new Holiday(15, 0), dept));
+        employeeRepository.save(new Employee("Aba", "abc@asdf.com", "Seoul",
+                "010-1234-1234", new Date(), new Holiday(15, 0), dept));
+        employeeRepository.save(new Employee("Dad", "abc@asdf.com", "Seoul",
+                "010-1234-1234", new Date(), new Holiday(15, 0), dept));
+        employeeRepository.save(new Employee("Cec", "abc@asdf.com", "Seoul",
+                "010-1234-1234", new Date(), new Holiday(15, 0), dept));
+        employeeRepository.save(new Employee("Eve", "abc@asdf.com", "Seoul",
+                "010-1234-1234", new Date(), new Holiday(15, 0), dept));
+        employeeRepository.save(new Employee("Fuf", "abc@asdf.com", "Seoul",
+                "010-1234-1234", new Date(), new Holiday(15, 0), dept));
     }
 
 }

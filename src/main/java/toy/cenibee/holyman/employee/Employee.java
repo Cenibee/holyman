@@ -32,6 +32,19 @@ public class Employee extends NamedEntity {
     @JoinColumn(foreignKey = @ForeignKey(name = "EMPLOYEE_BELONG_TO_DEPARTMENT"))
     private Department department;
 
+    public Employee() {}
+
+    public Employee(String name, String mailAddress, String address, String phNumber,
+                    Date entranceDate, Holiday holiday, Department department) {
+        this.setName(name);
+        this.mailAddress = mailAddress;
+        this.address = address;
+        this.phNumber = phNumber;
+        this.entranceDate = entranceDate;
+        this.holiday = holiday;
+        this.department = department;
+    }
+
     // -------------------------
     // |-- getters & setters --|
     // -------------------------
