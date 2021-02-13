@@ -4,9 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Home from './home';
-import Employees from './employees'
 
-// React-Router
 import {
     BrowserRouter as Router,
     Switch,
@@ -23,12 +21,6 @@ export default function App() {
                         <li>
                             <Link to="/">Home</Link>
                         </li>
-                        <li>
-                            <Link to="/about">About</Link>
-                        </li>
-                        <li>
-                            <Link to="/employees">Employees</Link>
-                        </li>
                     </ul>
                 </nav>
 
@@ -38,9 +30,6 @@ export default function App() {
                     {/*<Route path="/about">*/}
                     {/*    <About />*/}
                     {/*</Route>*/}
-                    <Route path="/employees">
-                        <Employees />
-                    </Route>
                     <Route path="/">
                         <Home />
                     </Route>
