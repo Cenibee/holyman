@@ -1,5 +1,6 @@
 package toy.cenibee.holyman.employee;
 
+import org.springframework.data.rest.core.annotation.RestResource;
 import toy.cenibee.holyman.department.Department;
 import toy.cenibee.holyman.holiday.Holiday;
 import toy.cenibee.holyman.model.NamedEntity;
@@ -29,7 +30,7 @@ public class Employee extends NamedEntity {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "EMPLOYEE_BELONG_TO_DEPARTMENT"))
+    @RestResource(exported = false)
     private Department department;
 
     public Employee() {}
