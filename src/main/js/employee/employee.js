@@ -1,6 +1,7 @@
 // 리액트 컴포넌트로 사용할 App 컴포넌트에 대한 선언
 import React from "react";
 import {EmployeeList} from './employee-list'
+import {EmployeeForm} from "./employee-form";
 
 import 'regenerator-runtime/runtime'
 
@@ -15,9 +16,11 @@ export default class Employee extends React.Component {
         this.state = {
             pageSize: DEFAULT_PAGE_SIZE,
             employees: [],
-            links: {}
+            links: {},
+            attributes: []
         };
 
+        this.onCreate = this.onCreate.bind(this);
         this.onNavigate = this.onNavigate.bind(this);
     }
 
@@ -47,6 +50,12 @@ export default class Employee extends React.Component {
         });
     }
 
+    onCreate(employee) {
+        axios.post('/api/employees', employee).catch(reason => {
+            alert("Failed to create employee: " + reason);
+        });
+    }
+
     onNavigate(navUrl) {
         axios.get(navUrl).then(employeeCollection => {
             this.setState({
@@ -60,10 +69,15 @@ export default class Employee extends React.Component {
     // 화면에 컴포넌트를 그리도록하는 API - 프레임워크 레벨에서 콜된다.
     render () {
         return (
-            <EmployeeList
-                links={this.state.links}
-                employees={this.state.employees}
-                onNavigate={this.onNavigate}/>
+            <div>
+                <EmployeeForm
+                    attributes={this.state.attributes}
+                    onCreate={this.onCreate}/>
+                <EmployeeList
+                    links={this.state.links}
+                    employees={this.state.employees}
+                    onNavigate={this.onNavigate}/>
+            </div>
         )
     }
 }
