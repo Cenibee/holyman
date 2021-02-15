@@ -3,7 +3,7 @@ import React from 'react';
 // DOM 과 React 서버 렌더러의 진입점 역할을 하는 패키지
 import ReactDOM from 'react-dom';
 
-import Employee from './employee';
+import Employee from './employee/employee';
 
 import {
     BrowserRouter as Router,
