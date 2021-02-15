@@ -22,6 +22,7 @@ export default class Employee extends React.Component {
 
         this.onCreate = this.onCreate.bind(this);
         this.onNavigate = this.onNavigate.bind(this);
+        this.onDelete = this.onDelete.bind(this);
     }
 
     // DOM 에 React 가 렌더링된 후 실행할 함수
@@ -56,6 +57,12 @@ export default class Employee extends React.Component {
         });
     }
 
+    onDelete(employee) {
+        axios.delete(employee['_links'].self.href).catch(reason => {
+            alert("Failed to delete employee: " + reason);
+        });
+    }
+
     onNavigate(navUrl) {
         axios.get(navUrl).then(employeeCollection => {
             this.setState({
@@ -76,6 +83,7 @@ export default class Employee extends React.Component {
                 <EmployeeList
                     links={this.state.links}
                     employees={this.state.employees}
+                    onDelete={this.onDelete}
                     onNavigate={this.onNavigate}/>
             </div>
         )

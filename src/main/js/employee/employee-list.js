@@ -13,7 +13,10 @@ export class EmployeeList extends React.Component {
 
     render() {
         const employees = this.props.employees.map(employee =>
-            <EmployeeListRow key={employee['_links'].self.href} employee={employee}/>
+            <EmployeeListRow
+                key={employee['_links'].self.href}
+                employee={employee}
+                onDelete={this.props.onDelete}/>
         );
         const navTo = ['first', 'prev', 'next', 'last']
         const navLinks = navTo.map(nav =>
@@ -21,7 +24,7 @@ export class EmployeeList extends React.Component {
                 key={nav}
                 onClick={e => this.handleNav(e, nav)}
                 disabled={!this.props.links[nav]}>
-                {nav}</button>
+                    {nav}</button>
         );
 
         return (
@@ -35,6 +38,7 @@ export class EmployeeList extends React.Component {
                         <th>Phone Number</th>
                         <th>Holiday</th>
                         <th>Entrance Date</th>
+                        <th>Delete</th>
                     </tr>
                     {employees}
                     </tbody>
@@ -56,6 +60,11 @@ class EmployeeListRow extends React.Component {
                 <td>{this.props.employee['holiday']['holidayCount']}
                     /{this.props.employee['holiday']['holidayTime']}</td>
                 <td>{this.props.employee['entranceDate']}</td>
+                <td>
+                    <button onClick={() => this.props.onDelete(this.props.employee)}>
+                        Delete
+                    </button>
+                </td>
             </tr>
         )
     }
