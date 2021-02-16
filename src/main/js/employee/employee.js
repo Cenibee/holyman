@@ -16,7 +16,7 @@ export default class Employee extends React.Component {
         this.state = {
             pageSize: DEFAULT_PAGE_SIZE,
             employees: [],
-            departments: [],
+            departments: {},
             links: {},
             attributes: []
         };
@@ -39,7 +39,10 @@ export default class Employee extends React.Component {
             },
         });
 
-        const departmentCollection = await axios.get('/api/departments');
+        const departmentMap = {};
+        (await axios.get('/api/departments')).data['_embedded'].departments.forEach(department =>
+            departmentMap[department.name] = department
+        );
 
         const schema = await axios.get(employeeCollection.data['_links'].profile.href, {
             headers: {Accept: 'application/schema+json'}
@@ -53,7 +56,7 @@ export default class Employee extends React.Component {
 
         this.setState({
             employees: employeeCollection.data['_embedded'].employees,
-            departments: departmentCollection.data['_embedded'].departments,
+            departments: departmentMap,
             pageSize: pageSize,
             page: employeeCollection.data.page,
             links: employeeCollection.data['_links'],

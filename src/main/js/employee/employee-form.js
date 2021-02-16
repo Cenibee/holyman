@@ -1,17 +1,39 @@
-import axios from "axios";
+import {DateFormField, SelectFormField, TextFormField} from "../common/form-fields";
 
 const React = require('react');
 
 export class EmployeeForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {formRefs: {}};
+        this.state = {
+            formRefs: {},
+            name: '',
+            entranceDate: '',
+            address: '',
+            mailAddress: '',
+            phNumber: '',
+            department: ''
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.holidayFormField = this.holidayFormField.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
-    handleSubmit() {
-        const employee = {};
-        this.props.onCreate(employee);
+    handleSubmit(e) {
+        e.preventDefault();
+        // TODO
+        // this.props.onCreate(employee);
+    }
+
+    holidayFormField() {
+        return (
+            // TODO
+            <p/>
+        )
+    }
+
+    onChange(attribute, value) {
+        this.setState({[attribute]: value});
     }
 
     render() {
@@ -25,12 +47,16 @@ export class EmployeeForm extends React.Component {
                         </a>
                         <h2>Create new Employee</h2>
                         <form>
-                            {textFormField('name', this.state.formRefs)}
-                            {textFormField('entranceDate', this.state.formRefs)}
-                            {textFormField('address', this.state.formRefs)}
-                            {textFormField('mailAddress', this.state.formRefs)}
-                            {textFormField('phNumber', this.state.formRefs)}
-                            {selectFormField('department', this.props.department, this.state.formRefs)}
+                            <TextFormField attribute={'name'} value={this.state['name']} onChange={this.onChange}/>
+                            <TextFormField attribute={'address'} value={this.state['address']} onChange={this.onChange}/>
+                            <TextFormField attribute={'mailAddress'} value={this.state['mailAddress']} onChange={this.onChange}/>
+                            <TextFormField attribute={'phNumber'} value={this.state['phNumber']} onChange={this.onChange}/>
+                            <DateFormField attribute={'entranceDate'} value={this.state['entranceDate']} onChange={this.onChange}/>
+                            <SelectFormField
+                                attribute={'department'} onChange={this.onChange}
+                                value={this.state['department']}
+                                list={Object.keys(this.props.department)}/>
+                            {this.holidayFormField()}
                             <button onClick={this.handleSubmit}>
                                 Create
                             </button>
@@ -40,48 +66,4 @@ export class EmployeeForm extends React.Component {
             </div>
         );
     }
-}
-
-function textFormField(attribute, refs) {
-    refs[attribute] = React.createRef();
-    return (
-        <p key={attribute}>
-            <input
-                type={attribute.indexOf('Date') == -1 ? 'text' : 'date'}
-                placeholder={attribute}
-                ref={refs[attribute]}
-                className={'field'}/>
-        </p>
-    )
-}
-
-function selectFormField(attribute, list, refs) {
-    refs[attribute] = React.createRef();
-
-    const options = list.map(option =>
-        <option
-                key={option}
-                value={option}>
-            {option.name}</option>
-    )
-
-    return (
-        <p key={attribute}>
-            <select
-                    placeholder={attribute}
-                    ref={refs[attribute]}
-                    className={'field'}>
-                {options}
-            </select>
-        </p>
-    )
-}
-
-function holidayFormField(attribute, refs) {
-    refs[attribute] = React.createRef();
-    return (
-        <p key={attribute}>
-            in
-        </p>
-    )
 }
