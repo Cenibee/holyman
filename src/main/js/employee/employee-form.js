@@ -1,4 +1,4 @@
-import {DateFormField, SelectFormField, TextFormField} from "../common/form-fields";
+import {DateFormField, NumberFormField, SelectFormField, TextFormField} from "../common/form-fields";
 
 const React = require('react');
 
@@ -12,25 +12,30 @@ export class EmployeeForm extends React.Component {
             address: '',
             mailAddress: '',
             phNumber: '',
-            department: ''
+            department: '',
+            holidayCount: 0,
+            holidayTime: 0
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.holidayFormField = this.holidayFormField.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onClose = this.onClose.bind(this);
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        // TODO
-        // this.props.onCreate(employee);
-    }
-
-    holidayFormField() {
-        return (
-            // TODO
-            <p/>
-        )
+        const newEmployee = {
+            name: this.state.name,
+            entranceDate: this.state.entranceDate,
+            address: this.state.address,
+            mailAddress: this.state.mailAddress,
+            phNumber: this.state.phNumber,
+            department: this.props.department[this.state.department]['_links'].self.href,
+            holiday: {
+                holidayCount: this.state.holidayCount,
+                holidayTime: this.state.holidayTime
+            }
+        }
+        this.props.onCreate(newEmployee);
     }
 
     onChange(attribute, value) {
@@ -66,7 +71,8 @@ export class EmployeeForm extends React.Component {
                         attribute={'department'} onChange={this.onChange}
                         value={this.state['department']}
                         list={Object.keys(this.props.department)}/>
-                    {this.holidayFormField()}
+                    <NumberFormField attribute={'holidayCount'} value={this.state['holidayCount']} onChange={this.onChange}/>
+                    <NumberFormField attribute={'holidayTime'} value={this.state['holidayTime']} onChange={this.onChange}/>
                     <button onClick={this.handleSubmit}>
                         Create
                     </button>

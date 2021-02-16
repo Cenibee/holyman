@@ -27,6 +27,13 @@ export class DateFormField extends TextFormField {
     }
 }
 
+export class NumberFormField extends TextFormField {
+    constructor(props) {
+        super(props);
+        this.state = {type: 'number'};
+    }
+}
+
 export class SelectFormField extends React.Component {
     constructor(props) {
         super(props);

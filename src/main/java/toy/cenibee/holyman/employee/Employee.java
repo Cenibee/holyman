@@ -28,9 +28,8 @@ public class Employee extends NamedEntity {
     @NotNull
     private Holiday holiday;
 
-    @NotNull
-    @ManyToOne
     @RestResource(exported = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Department department;
 
     public Employee() {}
