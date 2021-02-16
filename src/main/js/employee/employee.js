@@ -14,6 +14,7 @@ export default class Employee extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            selectedEmployee: {},
             pageSize: DEFAULT_PAGE_SIZE,
             employees: [],
             departments: {},
@@ -86,14 +87,23 @@ export default class Employee extends React.Component {
         });
     }
 
+    openForm(e, employee) {
+        e.preventDefault();
+        this.setState({selectedEmployee: employee});
+        window.location.hash = 'employeeForm';
+    }
+
     // 화면에 컴포넌트를 그리도록하는 API - 프레임워크 레벨에서 콜된다.
     render () {
         return (
             <div>
-                <EmployeeForm
-                    department={this.state.departments}
-                    attributes={this.state.attributes}
-                    onCreate={this.onCreate}/>
+                <button onClick={e => this.openForm(e, {})}>Create</button>
+                <div id={'employeeForm'} className={'modalDialog'}>
+                    <EmployeeForm
+                        department={this.state.departments}
+                        attributes={this.state.attributes}
+                        onCreate={this.onCreate}/>
+                </div>
                 <EmployeeList
                     links={this.state.links}
                     employees={this.state.employees}
