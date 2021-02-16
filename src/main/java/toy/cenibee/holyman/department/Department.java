@@ -6,5 +6,9 @@ import javax.persistence.Entity;
 
 @Entity
 public class Department extends NamedEntity {
+    public Department() {}
 
+    public Department(String name) {
+        this.setName(name);
+    }
 }
