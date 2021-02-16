@@ -16,6 +16,7 @@ export default class Employee extends React.Component {
         this.state = {
             pageSize: DEFAULT_PAGE_SIZE,
             employees: [],
+            departments: [],
             links: {},
             attributes: []
         };
@@ -38,12 +39,21 @@ export default class Employee extends React.Component {
             },
         });
 
+        const departmentCollection = await axios.get('/api/departments');
+
         const schema = await axios.get(employeeCollection.data['_links'].profile.href, {
             headers: {Accept: 'application/schema+json'}
         });
 
+        Object.keys(schema.data.properties).forEach(function (property) {
+            if('new' === property) {
+                delete schema.data.properties[property];
+            }
+        });
+
         this.setState({
             employees: employeeCollection.data['_embedded'].employees,
+            departments: departmentCollection.data['_embedded'].departments,
             pageSize: pageSize,
             page: employeeCollection.data.page,
             links: employeeCollection.data['_links'],
@@ -78,6 +88,7 @@ export default class Employee extends React.Component {
         return (
             <div>
                 <EmployeeForm
+                    department={this.state.departments}
                     attributes={this.state.attributes}
                     onCreate={this.onCreate}/>
                 <EmployeeList

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const React = require('react');
 
 export class EmployeeForm extends React.Component {
@@ -13,19 +15,6 @@ export class EmployeeForm extends React.Component {
     }
 
     render() {
-        const inputs = this.props.attributes.map(attribute => {
-            this.state.formRefs[attribute] = React.createRef();
-            return (
-                <p key={attribute}>
-                    <input
-                        type={'text'}
-                        placeholder={attribute}
-                        ref={this.state.formRefs[attribute]}
-                        className={'field'}/>
-                </p>
-            )
-        })
-
         return (
             <div>
                 <a href={'#employeeCreate'}>Create</a>
@@ -36,7 +25,12 @@ export class EmployeeForm extends React.Component {
                         </a>
                         <h2>Create new Employee</h2>
                         <form>
-                            {inputs}
+                            {textFormField('name', this.state.formRefs)}
+                            {textFormField('entranceDate', this.state.formRefs)}
+                            {textFormField('address', this.state.formRefs)}
+                            {textFormField('mailAddress', this.state.formRefs)}
+                            {textFormField('phNumber', this.state.formRefs)}
+                            {selectFormField('department', this.props.department, this.state.formRefs)}
                             <button onClick={this.handleSubmit}>
                                 Create
                             </button>
@@ -46,4 +40,48 @@ export class EmployeeForm extends React.Component {
             </div>
         );
     }
+}
+
+function textFormField(attribute, refs) {
+    refs[attribute] = React.createRef();
+    return (
+        <p key={attribute}>
+            <input
+                type={attribute.indexOf('Date') == -1 ? 'text' : 'date'}
+                placeholder={attribute}
+                ref={refs[attribute]}
+                className={'field'}/>
+        </p>
+    )
+}
+
+function selectFormField(attribute, list, refs) {
+    refs[attribute] = React.createRef();
+
+    const options = list.map(option =>
+        <option
+                key={option}
+                value={option}>
+            {option.name}</option>
+    )
+
+    return (
+        <p key={attribute}>
+            <select
+                    placeholder={attribute}
+                    ref={refs[attribute]}
+                    className={'field'}>
+                {options}
+            </select>
+        </p>
+    )
+}
+
+function holidayFormField(attribute, refs) {
+    refs[attribute] = React.createRef();
+    return (
+        <p key={attribute}>
+            in
+        </p>
+    )
 }
